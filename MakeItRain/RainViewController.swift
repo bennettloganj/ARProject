@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  RainViewController.swift
 //  MakeItRain
 //
 //  Created by LunarLincoln on 7/21/17.
@@ -10,9 +10,12 @@ import UIKit
 import SceneKit
 import ARKit
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class RainViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
+    
+    var itemNum = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
