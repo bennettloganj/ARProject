@@ -25,12 +25,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make It Rain" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0RA-vj-T46">
+                                <rect key="frame" x="74" y="104" width="226" height="34"/>
+                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Hj9-rH-lkD">
-                                <rect key="frame" x="112" y="305" width="150" height="144"/>
+                                <rect key="frame" x="87" y="310" width="200" height="144"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3mO-le-5ZX">
-                                        <rect key="frame" x="0.0" y="0.0" width="150" height="38"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="38"/>
+                                        <color key="backgroundColor" red="0.59633260970000002" green="0.73853141069999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="18"/>
                                         <state key="normal" title="Pumpkin">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -41,8 +47,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xa-vS-58K">
-                                        <rect key="frame" x="0.0" y="53" width="150" height="38"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <rect key="frame" x="0.0" y="53" width="200" height="38"/>
+                                        <color key="backgroundColor" red="0.59633260970000002" green="0.73853141069999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="18"/>
                                         <state key="normal" title="Mushroom">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -53,8 +59,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RMw-lp-0DA">
-                                        <rect key="frame" x="0.0" y="106" width="150" height="38"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <rect key="frame" x="0.0" y="106" width="200" height="38"/>
+                                        <color key="backgroundColor" red="0.59633260970000002" green="0.73853141069999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="18"/>
                                         <state key="normal" title="Money">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -66,24 +72,18 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="Nxs-UM-mox"/>
+                                    <constraint firstAttribute="width" constant="200" id="lZd-gK-lwj"/>
                                 </constraints>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make It Rain" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0RA-vj-T46">
-                                <rect key="frame" x="108" y="124" width="159" height="34"/>
-                                <fontDescription key="fontDescription" name="KohinoorBangla-Regular" family="Kohinoor Bangla" pointSize="24"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Hj9-rH-lkD" secondAttribute="trailing" constant="113" id="5iq-4Y-5cn"/>
-                            <constraint firstItem="Hj9-rH-lkD" firstAttribute="top" secondItem="0RA-vj-T46" secondAttribute="bottom" constant="147" id="9Fs-sJ-V3V"/>
-                            <constraint firstItem="0RA-vj-T46" firstAttribute="top" secondItem="tCh-YM-4eK" secondAttribute="bottom" constant="60" id="ATd-WX-d3O"/>
-                            <constraint firstItem="Hj9-rH-lkD" firstAttribute="leading" secondItem="4UK-H5-KhY" secondAttribute="leading" constant="112" id="We2-z3-05n"/>
-                            <constraint firstItem="0RA-vj-T46" firstAttribute="leading" secondItem="4UK-H5-KhY" secondAttribute="leading" constant="108" id="iaf-Os-3Vx"/>
-                            <constraint firstAttribute="trailing" secondItem="0RA-vj-T46" secondAttribute="trailing" constant="108" id="tPD-Ng-ea7"/>
+                            <constraint firstAttribute="trailing" secondItem="0RA-vj-T46" secondAttribute="trailing" constant="75" id="FTn-C9-cC9"/>
+                            <constraint firstItem="0RA-vj-T46" firstAttribute="top" secondItem="tCh-YM-4eK" secondAttribute="bottom" constant="40" id="MGf-yn-Kzn"/>
+                            <constraint firstItem="Hj9-rH-lkD" firstAttribute="leading" secondItem="4UK-H5-KhY" secondAttribute="leading" constant="87" id="N7P-wd-wKU"/>
+                            <constraint firstAttribute="trailing" secondItem="Hj9-rH-lkD" secondAttribute="trailing" constant="88" id="v2X-0F-w5w"/>
+                            <constraint firstItem="0RA-vj-T46" firstAttribute="leading" secondItem="4UK-H5-KhY" secondAttribute="leading" constant="74" id="wAJ-Ao-KjU"/>
+                            <constraint firstItem="G5g-FX-xqM" firstAttribute="top" secondItem="Hj9-rH-lkD" secondAttribute="bottom" constant="213" id="we8-s4-hSh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xGB-Mw-UVj"/>

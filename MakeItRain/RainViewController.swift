@@ -19,8 +19,8 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     var cloudNode: SCNNode?
     var label: UILabel?
     var spawnTime: TimeInterval = 0
-    var objectsArrayFiles: [String] = [ "art.scnassets/pumpkin.scn", "art.scnassets/golden-mushroom.scn", "art.scnassets/Lowpoly_tree_sample.scn"]
-    var objectsArrayNames: [String] = ["pumpkin", "Poly", "Tree_lp_11"]
+    var objectsArrayFiles: [String] = [ "art.scnassets/pumpkin.scn", "art.scnassets/golden-mushroom.scn", "art.scnassets/money_stack.scn"]
+    var objectsArrayNames: [String] = ["pumpkin", "Poly", "money_stack"]
     var planes = [String: SCNNode]()
     
     var isNegative = false
@@ -79,14 +79,14 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
             objectNode.scale.z = 0.01
         }
         else if itemNum == 1 {
-            objectNode.scale.x = 0.0075
-            objectNode.scale.y = 0.0075
-            objectNode.scale.z = 0.0075
+            objectNode.scale.x = 0.025
+            objectNode.scale.y = 0.025
+            objectNode.scale.z = 0.025
         }
         else {
-            objectNode.scale.x = 0.05
-            objectNode.scale.y = 0.05
-            objectNode.scale.z = 0.05
+            objectNode.scale.x = 1.3
+            objectNode.scale.y = 1.3
+            objectNode.scale.z = 1.3
         }
         objectNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
         
@@ -147,9 +147,12 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         if cloudNode != nil {
             cloudNode?.removeFromParentNode()
         }
-        let subScene = SCNScene(named: "art.scnassets/ship.scn")!
-        cloudNode = subScene.rootNode.childNode(withName: "shipMesh", recursively: true)
+        let subScene = SCNScene(named: "art.scnassets/Cloud_3.dae")!
+        cloudNode = subScene.rootNode.childNode(withName: "Cloud_3", recursively: true)
         cloudNode?.position = hitPosition
+        cloudNode?.scale.x = 0.2
+        cloudNode?.scale.y = 0.2
+        cloudNode?.scale.z = 0.2
         
         sceneView.scene.rootNode.addChildNode(cloudNode!)
         
@@ -252,7 +255,7 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
                     let nodeClone = self.selectedNode!.clone()
                     nodeClone.position = spawnPoint!
                     self.sceneView.scene.rootNode.addChildNode(nodeClone)
-                    self.spawnTime = time + TimeInterval(0.35)
+                    self.spawnTime = time + TimeInterval(0.1)
                 }
                 
             }
