@@ -116,7 +116,7 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         bottomPlane.materials = [material]
         
         let bottomNode = SCNNode(geometry: bottomPlane)
-        bottomNode.position = SCNVector3(x: 0, y: -1, z: 0)
+        bottomNode.position = SCNVector3(x: 0, y: -3, z: 0)
         
         let physicsBody = SCNPhysicsBody.static()
         physicsBody.categoryBitMask = bottomCategory
@@ -158,7 +158,7 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         guard let hitFeature = results.last else { return }
         let hitTransform = SCNMatrix4(hitFeature.worldTransform)
         let hitPosition = SCNVector3Make(hitTransform.m41,
-                                         2,
+                                         1,
                                          hitTransform.m43)
         
         spawnRainCloud(hitPosition: hitPosition)

@@ -21,8 +21,11 @@ class MenuViewController: UIViewController {
         moneyButton.layer.cornerRadius = 5
         pumpkinButton.layer.cornerRadius = 5
         mushroomButton.layer.cornerRadius = 5
-        self.navigationController?.isNavigationBarHidden = true
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
