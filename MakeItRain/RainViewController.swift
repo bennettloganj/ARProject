@@ -33,21 +33,26 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "Make It Rain"
+        
         // Set the view's delegate
         sceneView.delegate = self
         
-        label = UILabel(frame: CGRect(x: 0, y: 0, width: 310, height: 75))
-        label!.center = CGPoint(x: 160, y: 285)
+        label = UILabel(frame: CGRect(x: 0, y: 0, width: 375, height: 72))
+        label!.center = CGPoint(x: view.frame.size.width/2, y: 450)
         label!.textAlignment = .center
         label?.numberOfLines = 2
         label?.adjustsFontSizeToFitWidth = true
-        label!.text = "Get a plane then make it rain!"
+        label!.text = "Scan your surroundings to find a plane\n then tap the screen to make it rain"
+        label?.textColor = UIColor.blue
+        label?.font = UIFont(name: "SFText-Regular.otf", size: 18)
         
-        label?.backgroundColor = UIColor(white: 1, alpha: 0.25)
+        label?.backgroundColor = UIColor(white: 1, alpha: 0.7)
         self.view.addSubview(label!)
         
         // Show statistics such as fps and timing information
         //sceneView.showsStatistics = true
+        //sceneView.debugOptions = SCNDebugOptions.showPhysicsShapes
         
         // Create a new scene
         let scene = SCNScene(named: "art.scnassets/Cloud_3.scn")!
@@ -55,7 +60,7 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         // Set the scene to the view
         sceneView.scene = scene
         sceneView.scene.physicsWorld.contactDelegate = self
-        sceneView.scene.physicsWorld.gravity = SCNVector3Make(0.0, -9.81, 0.0)
+        sceneView.scene.physicsWorld.gravity = SCNVector3Make(0.0, -4, 0.0)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,17 +90,25 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
             objectNode.scale.z = 0.025
         }
         else {
-            objectNode.scale.x = 1.1
-            objectNode.scale.y = 1.1
-            objectNode.scale.z = 1.1
+            objectNode.scale.x = 1.3
+            objectNode.scale.y = 1.3
+            objectNode.scale.z = 1.3
         }
-        objectNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+        
+        if itemNum == 2{
+            let moneyShape =  SCNBox(width: 0.2, height: 0.1, length: 0.02, chamferRadius: 0)
+            let moneyPhysicsShape = SCNPhysicsShape(geometry: moneyShape, options: nil)
+            objectNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: moneyPhysicsShape)
+        }
+        else{
+            objectNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+        }
         
         objectNode.physicsBody?.categoryBitMask = objectCategory
         objectNode.physicsBody!.collisionBitMask = planeCategory | objectCategory
         objectNode.physicsBody!.contactTestBitMask = planeCategory
         
-        let bottomPlane = SCNBox(width: 1000, height: 0.005, length: 1000, chamferRadius: 0)
+        let bottomPlane = SCNBox(width: 1000, height: 0.05, length: 1000, chamferRadius: 0)
         
         // Use a clear material so the body is not visible
         let material = SCNMaterial()
@@ -155,7 +168,8 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         if cloudNode != nil {
             cloudNode?.removeFromParentNode()
         }
-        cloudNode = sceneView.scene.rootNode.childNode(withName: "Cloud_3", recursively: true)
+        let subScene = SCNScene(named: "art.scnassets/Cloud_3.scn")!
+        cloudNode = subScene.rootNode.childNode(withName: "Cloud_3", recursively: true)
         cloudNode?.position = hitPosition
         cloudNode?.scale.x = 0.2
         cloudNode?.scale.y = 0.2
@@ -186,7 +200,7 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
             self.label?.isHidden = true
         }
         
-        let plane = SCNBox(width: CGFloat(planeAnchor.extent.x), height: 0.005, length: CGFloat(planeAnchor.extent.z), chamferRadius: 0)
+        let plane = SCNBox(width: CGFloat(planeAnchor.extent.x), height: 0.01, length: CGFloat(planeAnchor.extent.z), chamferRadius: 0)
         
         let color = SCNMaterial()
         color.diffuse.contents = UIColor(red: 0, green: 0, blue: 1, alpha: 0.2)
@@ -226,7 +240,7 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
             if let geometry = existingPlane.geometry as? SCNBox {
                 geometry.width = CGFloat(planeAnchor.extent.x)
                 geometry.length = CGFloat(planeAnchor.extent.z)
-                let newShape = SCNBox(width: CGFloat(planeAnchor.extent.x)+1, height: 0.001, length: CGFloat(planeAnchor.extent.z)+1, chamferRadius: 0)
+                let newShape = SCNBox(width: CGFloat(planeAnchor.extent.x)+0.25, height: 0.01, length: CGFloat(planeAnchor.extent.z)+0.25, chamferRadius: 0)
                 existingPlane.physicsBody?.physicsShape = SCNPhysicsShape(geometry: newShape, options: nil)
             }
             existingPlane.position = SCNVector3Make(planeAnchor.center.x, -0.005, planeAnchor.center.z)
@@ -259,10 +273,13 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
                 isNegative = false
             }
             
+            
             if time > spawnTime {
                 DispatchQueue.main.async {
                     let nodeClone = self.selectedNode!.clone()
                     nodeClone.position = spawnPoint!
+                    //let orientaion = SCNQuaternion(drand48()*50, drand48()*50, drand48()*50, drand48()*50)
+                    //nodeClone.rotate(by: orientaion, aroundTarget: spawnPoint!)
                     self.sceneView.scene.rootNode.addChildNode(nodeClone)
                     self.spawnTime = time + TimeInterval(0.1)
                 }

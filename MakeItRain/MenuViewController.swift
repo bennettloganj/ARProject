@@ -10,21 +10,23 @@ import UIKit
 
 class MenuViewController: UIViewController {
     
-    
-    @IBAction func pumpkinButton(_ sender: UIButton) {
-    }
-    
-    @IBAction func mushroomAction(_ sender: UIButton) {
-    }
-    
-    @IBAction func moneyAction(_ sender: UIButton) {
-    }
-    
+    @IBOutlet weak var moneyButton: UIButton!
+    @IBOutlet weak var pumpkinButton: UIButton!
+    @IBOutlet weak var mushroomButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        moneyButton.layer.cornerRadius = 5
+        pumpkinButton.layer.cornerRadius = 5
+        mushroomButton.layer.cornerRadius = 5
+        self.navigationController?.isNavigationBarHidden = true
 
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
     }
 
     override func didReceiveMemoryWarning() {

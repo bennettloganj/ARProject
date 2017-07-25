@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B97631541F27CE9900AFD6D9 /* SFText-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = B97631521F27CE9900AFD6D9 /* SFText-Medium.otf */; };
+		B97631551F27CE9900AFD6D9 /* SFText-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B97631531F27CE9900AFD6D9 /* SFText-Regular.otf */; };
+		B97631571F27CEAC00AFD6D9 /* Arvil_Sans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B97631561F27CEAC00AFD6D9 /* Arvil_Sans.ttf */; };
 		B99272411F22836800879A51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99272401F22836800879A51 /* AppDelegate.swift */; };
 		B99272431F22836800879A51 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = B99272421F22836800879A51 /* art.scnassets */; };
 		B99272451F22836800879A51 /* RainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99272441F22836800879A51 /* RainViewController.swift */; };
@@ -17,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B97631521F27CE9900AFD6D9 /* SFText-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFText-Medium.otf"; sourceTree = "<group>"; };
+		B97631531F27CE9900AFD6D9 /* SFText-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFText-Regular.otf"; sourceTree = "<group>"; };
+		B97631561F27CEAC00AFD6D9 /* Arvil_Sans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Arvil_Sans.ttf; sourceTree = "<group>"; };
 		B992723D1F22836800879A51 /* MakeItRain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MakeItRain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B99272401F22836800879A51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B99272421F22836800879A51 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -39,6 +45,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B97631581F27CEB400AFD6D9 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				B97631521F27CE9900AFD6D9 /* SFText-Medium.otf */,
+				B97631531F27CE9900AFD6D9 /* SFText-Regular.otf */,
+				B97631561F27CEAC00AFD6D9 /* Arvil_Sans.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 		B99272341F22836800879A51 = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +78,7 @@
 				B99272421F22836800879A51 /* art.scnassets */,
 				B99272441F22836800879A51 /* RainViewController.swift */,
 				B99272541F2283E400879A51 /* MenuViewController.swift */,
+				B97631581F27CEB400AFD6D9 /* fonts */,
 				B99272461F22836800879A51 /* Main.storyboard */,
 				B99272491F22836800879A51 /* Assets.xcassets */,
 				B992724B1F22836800879A51 /* LaunchScreen.storyboard */,
@@ -128,9 +145,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B97631551F27CE9900AFD6D9 /* SFText-Regular.otf in Resources */,
 				B99272431F22836800879A51 /* art.scnassets in Resources */,
+				B97631541F27CE9900AFD6D9 /* SFText-Medium.otf in Resources */,
 				B992724D1F22836800879A51 /* LaunchScreen.storyboard in Resources */,
 				B992724A1F22836800879A51 /* Assets.xcassets in Resources */,
+				B97631571F27CEAC00AFD6D9 /* Arvil_Sans.ttf in Resources */,
 				B99272481F22836800879A51 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,6 +340,7 @@
 				B99272531F22836800879A51 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
