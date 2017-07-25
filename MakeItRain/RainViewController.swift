@@ -41,16 +41,16 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         label!.textAlignment = .center
         label?.numberOfLines = 2
         label?.adjustsFontSizeToFitWidth = true
-        label!.text = "Move around until you have located a plane.\nOnce you have a plane, tap on it to bring the rain!"
+        label!.text = "Get a plane then make it rain!"
         
         label?.backgroundColor = UIColor(white: 1, alpha: 0.25)
         self.view.addSubview(label!)
         
         // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
+        //sceneView.showsStatistics = true
         
         // Create a new scene
-        let scene = SCNScene(named: objectsArrayFiles[itemNum])!
+        let scene = SCNScene(named: "art.scnassets/Cloud_3.scn")!
         
         // Set the scene to the view
         sceneView.scene = scene
@@ -72,7 +72,8 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     
     override func didMove(toParentViewController parent: UIViewController?) {
         var objectNode = SCNNode()
-        objectNode = sceneView.scene.rootNode.childNode(withName: objectsArrayNames[itemNum], recursively: true)!
+        let subScene = SCNScene(named: objectsArrayFiles[itemNum])!
+        objectNode = subScene.rootNode.childNode(withName: objectsArrayNames[itemNum], recursively: true)!
         if itemNum == 0 {
             objectNode.scale.x = 0.01
             objectNode.scale.y = 0.01
@@ -84,9 +85,9 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
             objectNode.scale.z = 0.025
         }
         else {
-            objectNode.scale.x = 1.3
-            objectNode.scale.y = 1.3
-            objectNode.scale.z = 1.3
+            objectNode.scale.x = 1.1
+            objectNode.scale.y = 1.1
+            objectNode.scale.z = 1.1
         }
         objectNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
         
@@ -101,11 +102,9 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         material.diffuse.contents = UIColor(white: 1.0, alpha: 0.0)
         bottomPlane.materials = [material]
         
-        // Position 10 meters below the floor
         let bottomNode = SCNNode(geometry: bottomPlane)
         bottomNode.position = SCNVector3(x: 0, y: -1, z: 0)
         
-        // Apply kinematic physics, and collide with shape categories
         let physicsBody = SCNPhysicsBody.static()
         physicsBody.categoryBitMask = bottomCategory
         physicsBody.contactTestBitMask = objectCategory
@@ -114,6 +113,15 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         self.sceneView.scene.rootNode.addChildNode(bottomNode)
         
         self.selectedNode = objectNode
+    }
+    
+    func enableEnvironmentMapWithIntensity(_ intensity: CGFloat) {
+        if sceneView.scene.lightingEnvironment.contents == nil {
+            if let environmentMap = UIImage(named: "art.scnassets/environment_blur.exr") {
+                sceneView.scene.lightingEnvironment.contents = environmentMap
+            }
+        }
+        sceneView.scene.lightingEnvironment.intensity = intensity
     }
     
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
@@ -147,8 +155,7 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         if cloudNode != nil {
             cloudNode?.removeFromParentNode()
         }
-        let subScene = SCNScene(named: "art.scnassets/Cloud_3.dae")!
-        cloudNode = subScene.rootNode.childNode(withName: "Cloud_3", recursively: true)
+        cloudNode = sceneView.scene.rootNode.childNode(withName: "Cloud_3", recursively: true)
         cloudNode?.position = hitPosition
         cloudNode?.scale.x = 0.2
         cloudNode?.scale.y = 0.2
@@ -226,6 +233,7 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         }
     }
     
+    /*
     func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
         guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
         
@@ -235,6 +243,7 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
             self.planes.removeValue(forKey: key)
         }
     }
+    */
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         if cloudNode != nil {
@@ -260,15 +269,9 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
                 
             }
         }
+        
     }
-/*
-    // Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
-     
-        return node
-    }
-*/
+
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
