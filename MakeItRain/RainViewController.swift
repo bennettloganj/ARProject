@@ -278,8 +278,8 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
                 DispatchQueue.main.async {
                     let nodeClone = self.selectedNode!.clone()
                     nodeClone.position = spawnPoint!
-                    //let orientaion = SCNQuaternion(drand48()*50, drand48()*50, drand48()*50, drand48()*50)
-                    //nodeClone.rotate(by: orientaion, aroundTarget: spawnPoint!)
+                    //nodeClone.orientation = SCNQuaternion(1, 1, 1, Double(Float.pi)-drand48())
+                    nodeClone.eulerAngles = SCNVector3Make(Float.pi-Float(drand48()), Float.pi-Float(drand48()), Float.pi-Float(drand48()))
                     self.sceneView.scene.rootNode.addChildNode(nodeClone)
                     self.spawnTime = time + TimeInterval(0.1)
                 }
