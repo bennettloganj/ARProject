@@ -19,8 +19,8 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     var cloudNode: SCNNode?
     var label: UILabel?
     var spawnTime: TimeInterval = 0
-    var objectsArrayFiles: [String] = [ "art.scnassets/pumpkin.scn", "art.scnassets/golden-mushroom.scn", "art.scnassets/money_stack.scn"]
-    var objectsArrayNames: [String] = ["pumpkin", "Poly", "money_stack"]
+    var objectsArrayFiles: [String] = [ "art.scnassets/star.scn", "art.scnassets/Shark.scn", "art.scnassets/money_stack.scn"]
+    var objectsArrayNames: [String] = ["star", "Shark_01SG1", "money_stack"]
     var planes = [String: SCNNode]()
     
     var isNegative = false
@@ -29,6 +29,11 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
     let objectCategory:Int = 1 << 0
     let planeCategory:Int = 1 << 1
     let bottomCategory:Int = 1 << 2
+    
+    var omniNode1: SCNNode?
+    var omniNode2: SCNNode?
+    var omniNode3: SCNNode?
+    var ambientNode: SCNNode?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +62,35 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         // Create a new scene
         let scene = SCNScene(named: "art.scnassets/Cloud_3.scn")!
         
+        let omni = SCNLight()
+        omniNode1 = SCNNode()
+        omni.type = .omni
+        omni.color = UIColor.white
+        omni.intensity = 900
+        omniNode1?.light = omni
+        omniNode1?.position = SCNVector3Make(-2, 1, -2)
+        scene.rootNode.addChildNode(omniNode1!)
+        
+        omniNode2 = SCNNode()
+        omniNode2!.light = omni
+        omniNode2!.position = SCNVector3Make(2.6, 2, 0)
+        scene.rootNode.addChildNode(omniNode2!)
+        
+        omniNode3 = SCNNode()
+        omniNode3!.light = omni
+        omniNode3!.position = SCNVector3Make(-2, 2.5, 2)
+        scene.rootNode.addChildNode(omniNode3!)
+        
+        let ambient = SCNLight()
+        ambient.type = .ambient
+        ambient.color = UIColor.white
+        ambient.intensity = 300
+        ambientNode = SCNNode()
+        ambientNode!.light = ambient
+        scene.rootNode.addChildNode(ambientNode!)
+        
+        sceneView.autoenablesDefaultLighting = false
+        
         // Set the scene to the view
         sceneView.scene = scene
         sceneView.scene.physicsWorld.contactDelegate = self
@@ -80,14 +114,14 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         let subScene = SCNScene(named: objectsArrayFiles[itemNum])!
         objectNode = subScene.rootNode.childNode(withName: objectsArrayNames[itemNum], recursively: true)!
         if itemNum == 0 {
-            objectNode.scale.x = 0.01
-            objectNode.scale.y = 0.01
-            objectNode.scale.z = 0.01
+            objectNode.scale.x = 0.1
+            objectNode.scale.y = 0.1
+            objectNode.scale.z = 0.1
         }
         else if itemNum == 1 {
-            objectNode.scale.x = 0.025
-            objectNode.scale.y = 0.025
-            objectNode.scale.z = 0.025
+            objectNode.scale.x = 0.005
+            objectNode.scale.y = 0.005
+            objectNode.scale.z = 0.005
         }
         else {
             objectNode.scale.x = 1.3
@@ -126,15 +160,6 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
         self.sceneView.scene.rootNode.addChildNode(bottomNode)
         
         self.selectedNode = objectNode
-    }
-    
-    func enableEnvironmentMapWithIntensity(_ intensity: CGFloat) {
-        if sceneView.scene.lightingEnvironment.contents == nil {
-            if let environmentMap = UIImage(named: "art.scnassets/environment_blur.exr") {
-                sceneView.scene.lightingEnvironment.contents = environmentMap
-            }
-        }
-        sceneView.scene.lightingEnvironment.intensity = intensity
     }
     
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
@@ -287,6 +312,14 @@ class RainViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContact
             }
         }
         
+        /*
+        if let estimate = self.sceneView.session.currentFrame?.lightEstimate{
+            omniNode1?.light?.intensity = estimate.ambientIntensity-200
+            omniNode2?.light?.intensity = estimate.ambientIntensity-200
+            omniNode3?.light?.intensity = estimate.ambientIntensity-200
+            ambientNode?.light?.intensity = estimate.ambientIntensity-400
+        }
+         */
     }
 
     

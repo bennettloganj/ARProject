@@ -48,7 +48,7 @@
                                         <rect key="frame" x="0.0" y="112" width="285" height="78"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="ArvilSans" family="Arvil" pointSize="36"/>
-                                        <state key="normal" title="Pumpkin"/>
+                                        <state key="normal" title="stars"/>
                                         <connections>
                                             <segue destination="BV1-FR-VrT" kind="show" identifier="rainPumpkinSegue" id="BKM-Rr-8mI"/>
                                         </connections>
@@ -57,7 +57,7 @@
                                         <rect key="frame" x="0.0" y="224" width="285" height="78"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="ArvilSans" family="Arvil" pointSize="36"/>
-                                        <state key="normal" title="Mushroom"/>
+                                        <state key="normal" title="Sharks"/>
                                         <connections>
                                             <segue destination="BV1-FR-VrT" kind="show" identifier="rainMushroomSegue" id="ufj-5J-Bcp"/>
                                         </connections>
